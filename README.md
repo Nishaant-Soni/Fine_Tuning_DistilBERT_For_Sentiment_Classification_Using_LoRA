@@ -1,4 +1,4 @@
-# LLM Fine-Tuning For Sentiment Classification Using Low Rank Adaption (LoRA)
+# Supervised Fine-Tuning (SFT) For Sentiment Classification Using Low Rank Adaption (LoRA)
 
 This project demonstrates how to fine-tune a pre-trained language model using Low-Rank Adaptation (LoRA) for a sentiment classification task. The project uses the `distilbert-base-uncased` model from Hugging Face's Transformers library and fine-tunes it on a truncated version of the IMDb dataset for sentiment analysis.
 
