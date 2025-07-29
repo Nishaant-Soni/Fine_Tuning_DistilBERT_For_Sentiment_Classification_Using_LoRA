@@ -33,13 +33,23 @@ The training process involves the following steps:
 
 ## Evaluation
 
-The model is evaluated on the validation set using accuracy as the metric. The evaluation function computes the accuracy of the model's predictions.
+The model is evaluated on the validation set using multiple metrics, including:
+
+- **Accuracy**: Measures the percentage of correct predictions.
+- **Precision**: Evaluates the proportion of true positive predictions among all positive predictions.
+- **Recall**: Measures the proportion of true positive predictions among all actual positive instances.
+- **F1-Score**: Provides a harmonic mean of precision and recall.
+
+The evaluation function computes these metrics to assess the model's performance.
 
 ## Results
 
 The trained model achieves the following results on the validation set:
 
-- **Accuracy**: 90.5%
+- **Accuracy**: 90.80%
+- **Precision**: 91.63%
+- **Recall**: 89.80%
+- **F1-Score**: 90.71%
 
 ## Usage
 
