@@ -8,6 +8,7 @@ This project demonstrates how to fine-tune a pre-trained language model using Lo
 - [Training](#training)
 - [Evaluation](#evaluation)
 - [Results](#results)
+- [MLflow Tracking](#mlflow-tracking)
 - [Usage](#usage)
 - [Acknowledgements](#acknowledgements)
 
@@ -46,10 +47,52 @@ The evaluation function computes these metrics to assess the model's performance
 
 The trained model achieves the following results on the validation set:
 
-- **Accuracy**: 90.80%
-- **Precision**: 91.63%
-- **Recall**: 89.80%
-- **F1-Score**: 90.71%
+- **Accuracy**: 90.60%
+- **Precision**: 91.43%
+- **Recall**: 89.60%
+- **F1-Score**: 90.51%
+
+## MLflow Tracking
+
+This project uses MLflow to track experiments, log metrics, and save models. MLflow provides a centralized way to monitor the training process, compare different runs, and manage model artifacts.
+
+### Features
+- **Experiment Tracking**: All training runs are organized under a dedicated experiment.
+- **Parameter Logging**: Model configurations, LoRA parameters, and training hyperparameters are logged for reproducibility.
+- **Metric Tracking**: Accuracy, precision, recall, and F1-score metrics are logged during training and evaluation.
+- **Model Registry**: Trained models are saved with their tokenizers for easy deployment.
+- **Artifact Storage**: Sample predictions and model metadata are stored as artifacts.
+
+### How to Use MLflow
+1. **View experiment results**:
+   ```bash
+   mlflow ui --backend-store-uri file:./mlruns --port 8000
+   ```
+   Then open http://localhost:8000 in your browser.
+
+2. **Compare different runs**:
+   - Compare metrics across different LoRA configurations
+   - Analyze performance trends
+   - View parameter importance
+
+3. **Load a model from MLflow**:
+   ```python
+   import mlflow
+   
+   # Get the latest run ID
+   experiment = mlflow.get_experiment_by_name("DistilBERT-LoRA-Sentiment-Analysis")
+   runs = mlflow.search_runs(experiment_ids=[experiment.experiment_id], 
+                            order_by=["start_time DESC"], max_results=1)
+   run_id = runs.iloc[0].run_id
+   
+   # Load the model
+   model_uri = f"runs:/{run_id}/model"
+   loaded_model = mlflow.transformers.load_model(model_uri)
+   
+   # Use the model for inference
+   result = loaded_model("This movie was amazing!")
+   print(result)
+   ```
 
 ## Usage
 
@@ -81,5 +124,7 @@ To use the trained model for predictions, follow these steps:
 - [Hugging Face Transformers](https://github.com/huggingface/transformers)
 - [LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)
 - [IMDb Dataset](https://huggingface.co/datasets/shawhin/imdb-truncated)
+- [MLflow](https://mlflow.org/) - Open source platform for the machine learning lifecycle
+- [PEFT](https://github.com/huggingface/peft) - Parameter-Efficient Fine-Tuning library
 
 This project was developed as part of a learning exercise in fine-tuning language models using advanced techniques.
