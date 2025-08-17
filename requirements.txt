@@ -4,3 +4,4 @@ torch==1.10.0
 numpy==1.21.2
 evaluate==0.1.2
 peft==0.1.0
+mlflow==3.2.0
